@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import ReactFlow from 'reactflow';
 
 import 'reactflow/dist/style.css';
@@ -12,8 +12,10 @@ const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 export default function App() {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
+      <h1 className="text-3xl font-bold underline">
+      Track Lineage
+      </h1>
       <ReactFlow nodes={initialNodes} edges={initialEdges} />
-
     </div>
   );
 }
