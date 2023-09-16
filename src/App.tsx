@@ -1,5 +1,7 @@
-// import React from 'react';
-import ReactFlow from 'reactflow';
+// import React, { useCallback } from 'react';
+import ReactFlow, {
+  Background,
+} from 'reactflow';
 
 import 'reactflow/dist/style.css';
 
@@ -15,7 +17,11 @@ export default function App() {
       <h1 className="text-3xl font-bold underline">
       Track Lineage
       </h1>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} />
+      <ReactFlow 
+        nodes={initialNodes} edges={initialEdges}
+      >
+        <Background variant='dots' gap={12} size={1} />
+      </ReactFlow>
     </div>
   );
 }
