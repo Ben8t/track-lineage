@@ -36,12 +36,13 @@ function Flow() {
 
   
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '50rem', height: '25rem' }}>
       <CustomButton
         nodes={nodes}
         setNodes={setNodes}
       />
       <ReactFlow
+        className='flow_board ml-8'
         nodes={nodes}
         onNodesChange={onNodesChange}
         edges={edges}

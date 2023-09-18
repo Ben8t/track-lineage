@@ -2,7 +2,7 @@
 function Header() {  
     return (
       <div>
-        <h1 className="text-3xl font-bold underline">Track Lineage</h1>
+        <h1 className="font-mono text-3xl font-bold underline">Track Lineage</h1>
       </div>
     );
   }
