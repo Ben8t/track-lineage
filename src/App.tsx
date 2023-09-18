@@ -1,27 +1,62 @@
-// import React, { useCallback } from 'react';
-import ReactFlow, {
-  Background,
-} from 'reactflow';
-
+import { useState, useCallback } from 'react';
+import ReactFlow, { Background, applyNodeChanges, applyEdgeChanges, addEdge } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+  {
+    id: '1',
+    data: { label: 'Hello' },
+    position: { x: 0, y: 0 },
+    type: 'input',
+  },
+  {
+    id: '2',
+    data: { label: 'World' },
+    position: { x: 100, y: 100 },
+  },
 ];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
-export default function App() {
+const initialEdges = [{ id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' }];
+
+function Flow() {
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    []
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    []
+  );
+
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+
+  function onButtonClick() {
+    setNodes(nodes.concat({
+      id: '3',
+      data: { label: 'Toto' },
+      position: { x: 200, y: 0 },
+      type: 'input',
+    }))
+  }
+  
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      <h1 className="text-3xl font-bold underline">
-      Track Lineage
-      </h1>
-      <ReactFlow 
-        nodes={initialNodes} edges={initialEdges}
+      <button onClick={onButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Button</button>
+      <ReactFlow
+        nodes={nodes}
+        onNodesChange={onNodesChange}
+        edges={edges}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
       >
-        <Background variant='dots' gap={12} size={1} />
+        <Background />
       </ReactFlow>
+      
     </div>
   );
 }
+
+export default Flow;
