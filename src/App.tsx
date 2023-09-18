@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import ReactFlow, { Background, applyNodeChanges, applyEdgeChanges, addEdge } from 'reactflow';
+import ReactFlow, { Background, applyNodeChanges, applyEdgeChanges, addEdge, NodeChange, EdgeChange, Connection, Edge } from 'reactflow';
 import 'reactflow/dist/style.css';
+import CustomButton from './CustomButton.tsx'
 
 const initialNodes = [
   {
@@ -23,28 +24,23 @@ function Flow() {
   const [edges, setEdges] = useState(initialEdges);
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
     []
   );
   const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
 
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+  const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), []);
 
-  function onButtonClick() {
-    setNodes(nodes.concat({
-      id: '3',
-      data: { label: 'Toto' },
-      position: { x: 200, y: 0 },
-      type: 'input',
-    }))
-  }
   
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      <button onClick={onButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Button</button>
+      <CustomButton
+        nodes={nodes}
+        setNodes={setNodes}
+      />
       <ReactFlow
         nodes={nodes}
         onNodesChange={onNodesChange}
