@@ -1,6 +1,11 @@
 import { useState, FormEvent } from 'react'
+import { Node } from 'reactflow'
 
-function CustomButton({ nodes, setNodes }) {
+type Props = {
+  nodes: Node[]
+  setNodes: React.Dispatch<React.SetStateAction<Node[]>>
+}
+function CustomButton({ nodes, setNodes }: Props) {
   const [state, setState] = useState({
     id: '',
     name: '',
