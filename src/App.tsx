@@ -17,7 +17,7 @@ const initialNodes: Node[] = [
   {
     id: '1',
     data: { label: 'Hello' },
-    position: { x: 0, y: 0 },
+    position: { x: 20, y: 20 },
     type: 'input',
   },
   {
@@ -28,7 +28,7 @@ const initialNodes: Node[] = [
 ]
 
 const initialEdges: Edge[] = [
-  { id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' },
+  { id: '1-2', source: '1', target: '2'},
 ]
 
 function Flow() {
@@ -52,7 +52,7 @@ function Flow() {
   )
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-10 m-2">
       <div style={{ width: '100%', height: '100%' }}>
         <ReactFlow
           className="flow_board"

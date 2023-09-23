@@ -22,19 +22,25 @@ function CustomButton({ nodes, setNodes }: Props) {
   }
 
   return (
-    <div className="ml-8 mt-8 grid grid-cols-3">
+    <div className='overflow-auto' style={{ width: '100%', height: '20rem' }}>
       {node_library.map(node => (
-        <form className="form space-y-2" onSubmit={(e) => onSubmit(node, e)} key={node.id}>
-          <span key={node.id}>
-            ID: {node.id}, Label: {node.data.label}
-          </span>
-          <button
-            className="bg-primary-500 hover:bg-primary-700 text-gray-900 text-white rounded px-4 py-2 font-bold"
-            type="submit"
-          >
-            Add Node
-          </button>
-        </form>
+        <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <form className="form space-y-2" onSubmit={(e) => onSubmit(node, e)} key={node.id}>
+            <p className="font-normal text-test dark:text-gray-400" key={node.id}>
+              ID: {node.id}
+            </p>
+            <p className="font-normal text-test dark:text-gray-400" key={node.data.label}>
+              Label: {node.data.label}
+            </p>
+            <button
+              className="bg-test hover:bg-test-700 text-white font-bold py-2 px-4 rounded"
+              type="submit"
+            >
+              Add Node
+            </button>
+          </form>
+        </div>
+        
       ))}
     </div>
   )
