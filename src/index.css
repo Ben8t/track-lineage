@@ -5,3 +5,14 @@
 .flow_board {
   background-color: #f3f3f3;
 }
+
+.header {
+  background-color: #16160E;
+  padding-bottom: 1rem;
+}
+
+.title {
+  color: white;
+  margin-left: 2rem;
+  padding-top: 1rem;
+}

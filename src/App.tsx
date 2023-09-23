@@ -11,13 +11,13 @@ import ReactFlow, {
   Node,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
-import CustomButton from './CustomButton.tsx'
+import Search from './Search.tsx'
 
 const initialNodes: Node[] = [
   {
     id: '1',
     data: { label: 'Hello' },
-    position: { x: 0, y: 0 },
+    position: { x: 20, y: 20 },
     type: 'input',
   },
   {
@@ -28,7 +28,7 @@ const initialNodes: Node[] = [
 ]
 
 const initialEdges: Edge[] = [
-  { id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' },
+  { id: '1-2', source: '1', target: '2'},
 ]
 
 function Flow() {
@@ -52,18 +52,25 @@ function Flow() {
   )
 
   return (
-    <div style={{ width: '50rem', height: '25rem' }}>
-      <CustomButton nodes={nodes} setNodes={setNodes} />
-      <ReactFlow
-        className="flow_board ml-8"
-        nodes={nodes}
-        onNodesChange={onNodesChange}
-        edges={edges}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      >
-        <Background />
-      </ReactFlow>
+    <div className="grid grid-cols-2 gap-10 m-2">
+      <div style={{ width: '100%', height: '100%' }}>
+        <ReactFlow
+          className="flow_board"
+          nodes={nodes}
+          onNodesChange={onNodesChange}
+          edges={edges}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        >
+          <Background />
+        </ReactFlow>
+      </div>
+      <div>
+        <Search
+          nodes={nodes}
+          setNodes={setNodes}
+        />
+      </div>
     </div>
   )
 }
