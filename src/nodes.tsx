@@ -5,6 +5,8 @@ function create_library(nb_title: number){
     for (let i = 0; i < nb_title; i++) {
         const node = {
             id: `${i}`,
+            sourcePosition: 'right',
+            targetPosition: 'left',
             data: { label: `Title ${i}` },
             position: { x: 500, y: 100 },
         };
