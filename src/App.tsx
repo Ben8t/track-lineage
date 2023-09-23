@@ -11,7 +11,7 @@ import ReactFlow, {
   Node,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
-import CustomButton from './CustomButton.tsx'
+import Search from './Search.tsx'
 
 const initialNodes: Node[] = [
   {
@@ -52,18 +52,25 @@ function Flow() {
   )
 
   return (
-    <div style={{ width: '50rem', height: '25rem' }}>
-      <CustomButton nodes={nodes} setNodes={setNodes} />
-      <ReactFlow
-        className="flow_board ml-8"
-        nodes={nodes}
-        onNodesChange={onNodesChange}
-        edges={edges}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      >
-        <Background />
-      </ReactFlow>
+    <div className="grid grid-cols-2 gap-4">
+      <div style={{ width: '100%', height: '100%' }}>
+        <ReactFlow
+          className="flow_board"
+          nodes={nodes}
+          onNodesChange={onNodesChange}
+          edges={edges}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        >
+          <Background />
+        </ReactFlow>
+      </div>
+      <div>
+        <Search
+          nodes={nodes}
+          setNodes={setNodes}
+        />
+      </div>
     </div>
   )
 }
