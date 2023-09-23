@@ -36,7 +36,7 @@ function CustomButton({ nodes, setNodes }: Props) {
             </div>
             <div>
               <button className="col-span-1 bg-test hover:bg-test-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                Add Node
+                Add Track
               </button>
             </div>
 
