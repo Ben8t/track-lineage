@@ -1,10 +1,10 @@
-import CustomButton from './CustomButton.tsx'
+import CustomCard from './CustomCard.tsx'
 
 function Search({ nodes, setNodes }: Props) {
     return (
-      <div className="search">
-        <span>Search</span>
-        <CustomButton nodes={nodes} setNodes={setNodes} />
+      <div className="search bg-gray-100 rounded-lg">
+        <span className='font-mono text-1xl font-bold'>Search</span>
+        <CustomCard nodes={nodes} setNodes={setNodes} />
       </div>
     )
   }
