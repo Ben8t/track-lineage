@@ -16,8 +16,8 @@ function CustomNode({ data, isConnectable }) {
         className="h-3 w-3 bg-purple"
       />
       <div>
-        <label>{data.label}</label>
-        <hr />
+        <img src={data.image} style={{ width: '20%'}} /> <span>{data.title} - {data.artist}</span>
+        <hr className='h-px my-2 bg-light-purple border-0'/>
         <span>Key: {data.key}</span>
         <span>BPM: {data.bpm}</span>
         <span>Style: {data.style}</span>
