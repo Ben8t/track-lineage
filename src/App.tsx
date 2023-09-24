@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useCallback } from 'react'
+import ReactFlow, {
+  Background,
+  applyNodeChanges,
+  applyEdgeChanges,
+  addEdge,
+  NodeChange,
+  EdgeChange,
+  Connection,
+  Edge,
+  Node,
+} from 'reactflow'
+import 'reactflow/dist/style.css'
+import Search from './Search.tsx'
+import './custom_node.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import CustomNode from './CustomNode.tsx';
+
+const nodeTypes = { customNode: CustomNode };
+
+const initialNodes: Node[] = [
+]
+
+const initialEdges: Edge[] = [
+]
+
+function Flow() {
+  const [nodes, setNodes] = useState<Node[]>(initialNodes)
+  const [edges, setEdges] = useState<Edge[]>(initialEdges)
+
+  const onNodesChange = useCallback(
+    (changes: NodeChange[]) =>
+      setNodes((nds) => applyNodeChanges(changes, nds)),
+    [],
+  )
+  const onEdgesChange = useCallback(
+    (changes: EdgeChange[]) =>
+      setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [],
+  )
+
+  const onConnect = useCallback(
+    (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
+    [],
+  )
 
   return (
-    <>
+    <div className="grid grid-cols-4 gap-2 m-2">
+      <div className="col-span-3" style={{ width: '100%', height: '100%' }}>
+        <ReactFlow
+          className="flow_board"
+          nodes={nodes}
+          onNodesChange={onNodesChange}
+          edges={edges}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          nodeTypes={nodeTypes}
+        >
+          <Background />
+        </ReactFlow>
+      </div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Search
+          nodes={nodes}
+          setNodes={setNodes}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
-export default App
+export default Flow
