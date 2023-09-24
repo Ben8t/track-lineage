@@ -7,16 +7,16 @@ type Props = {
   nodes: Node[]
   setNodes: React.Dispatch<React.SetStateAction<Node[]>>
 }
-function SearchList({ nodes, setNodes }: Props) {
+function SearchList({ nodes, setNodes, tracks}: Props) {
 
-  function onSubmit(node, event: FormEvent<HTMLFormElement>) {
+  function onSubmit(track, event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log(node)
+    console.log(track)
     setNodes(
       nodes.concat({
-        id: node.id,
+        id: track.id,
         type: "customNode",
-        data: { title: node.data.title, artist: node.data.artist, bpm: node.data.bpm, key: node.data.key, style: node.data.style},
+        data: { title: track.name, artist: track.artists[0].name, bpm: "110", key: "Eb", style: "Disco", image: track.album.images[0].url },
         position: { x: 500, y: 25 },
       }),
     )
@@ -24,15 +24,16 @@ function SearchList({ nodes, setNodes }: Props) {
 
   return (
     <div className='overflow-auto' style={{ width: '100%', height: '20rem' }}>
-      {node_library.map(node => (
+      {tracks.map(track => (
         <div className="max-w-sm p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <form className="form grid grid-cols-2" onSubmit={(e) => onSubmit(node, e)} key={node.id}>
+          <form className="form grid grid-cols-2" onSubmit={(e) => onSubmit(track, e)} key={track.id}>
             <div>
-              <p className="font-mono font-normal text-purple dark:text-gray-400" key={node.data.title}>
-                {node.data.title}
+              <p className="font-mono font-normal text-purple dark:text-gray-400" key={track.name}>
+                <img src={track.album.images[0].url} style={{ width: '50%'}} />
+                {track.name}
               </p>
-              <p className="font-mono font-normal text-purple dark:text-gray-400" key={node.data.artist}>
-                {node.data.artist}
+              <p className="font-mono font-normal text-purple dark:text-gray-400" key={track.artists[0].name}>
+                {track.artists[0].name}
               </p>
             </div>
             <div>
