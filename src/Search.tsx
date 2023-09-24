@@ -1,10 +1,10 @@
-import CustomCard from './CustomCard.tsx'
+import SearchList from './SearchList.tsx'
 
 function Search({ nodes, setNodes }: Props) {
     return (
       <div className="search bg-gray-100 rounded-lg">
         <span className='font-mono text-1xl font-bold'>Search</span>
-        <CustomCard nodes={nodes} setNodes={setNodes} />
+        <SearchList nodes={nodes} setNodes={setNodes} />
       </div>
     )
   }

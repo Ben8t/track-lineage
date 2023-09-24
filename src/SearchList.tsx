@@ -7,7 +7,7 @@ type Props = {
   nodes: Node[]
   setNodes: React.Dispatch<React.SetStateAction<Node[]>>
 }
-function CustomCard({ nodes, setNodes }: Props) {
+function SearchList({ nodes, setNodes }: Props) {
 
   function onSubmit(node, event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -45,4 +45,4 @@ function CustomCard({ nodes, setNodes }: Props) {
   )
 }
 
-export default CustomCard
+export default SearchList
