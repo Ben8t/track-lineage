@@ -16,7 +16,7 @@ function SearchList({ nodes, setNodes }: Props) {
       nodes.concat({
         id: node.id,
         type: "customNode",
-        data: { label: node.data.label, bpm: node.data.bpm, key: node.data.key, style: node.data.style },
+        data: { title: node.data.title, artist: node.data.artist, bpm: node.data.bpm, key: node.data.key, style: node.data.style},
         position: { x: 500, y: 25 },
       }),
     )
@@ -28,8 +28,11 @@ function SearchList({ nodes, setNodes }: Props) {
         <div className="max-w-sm p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <form className="form grid grid-cols-2" onSubmit={(e) => onSubmit(node, e)} key={node.id}>
             <div>
-              <p className="font-mono font-normal text-purple dark:text-gray-400" key={node.data.label}>
-                {node.data.label}
+              <p className="font-mono font-normal text-purple dark:text-gray-400" key={node.data.title}>
+                {node.data.title}
+              </p>
+              <p className="font-mono font-normal text-purple dark:text-gray-400" key={node.data.artist}>
+                {node.data.artist}
               </p>
             </div>
             <div>

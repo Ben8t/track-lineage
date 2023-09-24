@@ -11,7 +11,7 @@ function CustomNode({ data, isConnectable }) {
     <div className="text-updater-node shadow-md">
       <Handle type="target" position={Position.Left} id="target" isConnectable={isConnectable} className="h-3 w-3 bg-purple"/>
       <div>
-        <label>{data.label}</label>
+        <label>{data.title} - {data.artist}</label>
         <hr />
         <span>Key: {data.key}</span>
         <span>BPM: {data.bpm}</span>
