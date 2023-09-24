@@ -2,7 +2,6 @@ import { FormEvent } from 'react'
 import { Node } from 'reactflow'
 import node_library from './nodes'
 
-
 type Props = {
   nodes: Node[]
   setNodes: React.Dispatch<React.SetStateAction<Node[]>>
@@ -37,14 +36,15 @@ function SearchList({ nodes, setNodes, tracks}: Props) {
               </p>
             </div>
             <div>
-              <button className="font-mono col-span-1 bg-purple hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" type="submit">
+              <button
+                className="hover:bg-purple-700 col-span-1 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
+                type="submit"
+              >
                 Add Track
               </button>
             </div>
-
           </form>
         </div>
-        
       ))}
     </div>
   )

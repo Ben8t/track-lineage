@@ -1,14 +1,13 @@
 .text-updater-node {
-    width: 10rem;
-    border: 1px solid rgba(137, 38, 215, 0.3);
-    padding: 5px;
-    border-radius: 5px;
-    background: white;
-  }
-  
-  .text-updater-node span {
-    display: block;
-    color: #777;
-    font-size: 12px;
-  }
-  
+  width: 10rem;
+  border: 1px solid rgba(137, 38, 215, 0.3);
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+}
+
+.text-updater-node span {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}

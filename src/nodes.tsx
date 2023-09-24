@@ -12,9 +12,11 @@ function create_library(nb_title: number){
         };
         tmp.push(node);
     }
-    return tmp;
+    tmp.push(node)
+  }
+  return tmp
 }
 
-const node_library = create_library(10);
+const node_library = create_library(10)
 
-export default node_library;
+export default node_library
