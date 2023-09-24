@@ -12,6 +12,11 @@ import ReactFlow, {
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import Search from './Search.tsx'
+import './custom_node.css'
+
+import CustomNode from './CustomNode.tsx';
+
+const nodeTypes = { customNode: CustomNode };
 
 const initialNodes: Node[] = [
 ]
@@ -49,6 +54,7 @@ function Flow() {
           edges={edges}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          nodeTypes={nodeTypes}
         >
           <Background />
         </ReactFlow>
