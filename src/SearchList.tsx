@@ -15,7 +15,8 @@ function SearchList({ nodes, setNodes }: Props) {
     setNodes(
       nodes.concat({
         id: node.id,
-        data: { label: node.data.label },
+        type: "customNode",
+        data: { label: node.data.label, bpm: node.data.bpm, key: node.data.key, style: node.data.style },
         position: { x: 500, y: 25 },
       }),
     )
@@ -27,12 +28,12 @@ function SearchList({ nodes, setNodes }: Props) {
         <div className="max-w-sm p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <form className="form grid grid-cols-2" onSubmit={(e) => onSubmit(node, e)} key={node.id}>
             <div>
-              <p className="font-mono font-normal text-test dark:text-gray-400" key={node.data.label}>
+              <p className="font-mono font-normal text-purple dark:text-gray-400" key={node.data.label}>
                 {node.data.label}
               </p>
             </div>
             <div>
-              <button className="font-mono col-span-1 bg-test hover:bg-test-700 text-white font-bold py-2 px-4 rounded" type="submit">
+              <button className="font-mono col-span-1 bg-purple hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" type="submit">
                 Add Track
               </button>
             </div>
