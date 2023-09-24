@@ -14,15 +14,13 @@ import 'reactflow/dist/style.css'
 import Search from './Search.tsx'
 import './custom_node.css'
 
-import CustomNode from './CustomNode.tsx';
+import CustomNode from './CustomNode.tsx'
 
-const nodeTypes = { customNode: CustomNode };
+const nodeTypes = { customNode: CustomNode }
 
-const initialNodes: Node[] = [
-]
+const initialNodes: Node[] = []
 
-const initialEdges: Edge[] = [
-]
+const initialEdges: Edge[] = []
 
 function Flow() {
   const [nodes, setNodes] = useState<Node[]>(initialNodes)
@@ -45,7 +43,7 @@ function Flow() {
   )
 
   return (
-    <div className="grid grid-cols-4 gap-2 m-2">
+    <div className="m-2 grid grid-cols-4 gap-2">
       <div className="col-span-3" style={{ width: '100%', height: '100%' }}>
         <ReactFlow
           className="flow_board"
@@ -60,10 +58,7 @@ function Flow() {
         </ReactFlow>
       </div>
       <div>
-        <Search
-          nodes={nodes}
-          setNodes={setNodes}
-        />
+        <Search nodes={nodes} setNodes={setNodes} />
       </div>
     </div>
   )
