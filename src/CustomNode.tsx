@@ -15,6 +15,7 @@ type Props = {
 }
 
 const CustomNode = ({ data, isConnectable }: Props) => {
+  console.log(data)
   const { image, title, artist, key, bpm, style } = data
 
   return (
@@ -31,7 +32,7 @@ const CustomNode = ({ data, isConnectable }: Props) => {
         <span>
           {title} - {artist}
         </span>
-        <hr className="bg-light-purple my-2 h-px border-0" />
+        <hr className="my-2 h-px border-0 bg-light-purple" />
         <span>Key: {key}</span>
         <span>BPM: {bpm}</span>
         <span>Style: {style}</span>
