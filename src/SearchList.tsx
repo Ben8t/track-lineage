@@ -1,6 +1,5 @@
 import { FormEvent } from 'react'
 import { Node } from 'reactflow'
-import node_library from './nodes'
 
 type Props = {
   nodes: Node[]
