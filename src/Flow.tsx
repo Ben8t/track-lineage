@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import ReactFlow, {
   Background,
   applyNodeChanges,
@@ -18,6 +18,8 @@ import CustomNode from './CustomNode.js'
 const Flow = () => {
   const [nodes, setNodes] = useState<Node[]>([])
   const [edges, setEdges] = useState<Edge[]>([])
+
+  const nodeType = useMemo(() => ({ customNode: CustomNode }), [])
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -44,7 +46,7 @@ const Flow = () => {
           edges={edges}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          nodeTypes={{ customNode: CustomNode }}
+          nodeTypes={nodeType}
         >
           <Background />
         </ReactFlow>
