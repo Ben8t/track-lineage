@@ -13,18 +13,11 @@ import ReactFlow, {
 import 'reactflow/dist/style.css'
 import Search from './Search.js'
 import './custom_node.css'
-
 import CustomNode from './CustomNode.js'
 
-const nodeTypes = { customNode: CustomNode }
-
-const initialNodes: Node[] = []
-
-const initialEdges: Edge[] = []
-
 const Flow = () => {
-  const [nodes, setNodes] = useState<Node[]>(initialNodes)
-  const [edges, setEdges] = useState<Edge[]>(initialEdges)
+  const [nodes, setNodes] = useState<Node[]>([])
+  const [edges, setEdges] = useState<Edge[]>([])
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -51,7 +44,7 @@ const Flow = () => {
           edges={edges}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          nodeTypes={nodeTypes}
+          nodeTypes={{ customNode: CustomNode }}
         >
           <Background />
         </ReactFlow>
