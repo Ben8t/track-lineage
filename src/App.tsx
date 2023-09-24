@@ -15,6 +15,7 @@ import Search from './Search.tsx'
 import './custom_node.css'
 
 import CustomNode from './CustomNode.tsx'
+import Header from './Header.tsx'
 
 const nodeTypes = { customNode: CustomNode }
 
@@ -43,24 +44,27 @@ function Flow() {
   )
 
   return (
-    <div className="m-2 grid grid-cols-4 gap-2">
-      <div className="col-span-3" style={{ width: '100%', height: '100%' }}>
-        <ReactFlow
-          className="flow_board"
-          nodes={nodes}
-          onNodesChange={onNodesChange}
-          edges={edges}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          nodeTypes={nodeTypes}
-        >
-          <Background />
-        </ReactFlow>
+    <>
+      <Header />
+      <div className="m-2 grid grid-cols-4 gap-2">
+        <div className="col-span-3" style={{ width: '100%', height: '100%' }}>
+          <ReactFlow
+            className="flow_board"
+            nodes={nodes}
+            onNodesChange={onNodesChange}
+            edges={edges}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            nodeTypes={nodeTypes}
+          >
+            <Background />
+          </ReactFlow>
+        </div>
+        <div>
+          <Search nodes={nodes} setNodes={setNodes} />
+        </div>
       </div>
-      <div>
-        <Search nodes={nodes} setNodes={setNodes} />
-      </div>
-    </div>
+    </>
   )
 }
 
