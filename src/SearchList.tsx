@@ -23,7 +23,7 @@ function SearchList({ nodes, setNodes, tracks}: Props) {
   }
 
   return (
-    <div className='overflow-auto' style={{ width: '100%', height: '20rem' }}>
+    <div className='overflow-auto' style={{ width: '100%', height: '50rem' }}>
       {tracks.map(track => (
         <div className="max-w-sm p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <form className="form grid grid-cols-2" onSubmit={(e) => onSubmit(track, e)} key={track.id}>
