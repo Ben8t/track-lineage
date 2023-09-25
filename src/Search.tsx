@@ -1,7 +1,7 @@
 import SearchList from './SearchList.tsx'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import { AppContext } from './context/index.tsx'
+import { SpotifyContext } from './context/SpotifyContext.tsx'
 
 const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
 const REDIRECT_URI = 'http://localhost:5173'
@@ -9,7 +9,7 @@ const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
 const RESPONSE_TYPE = 'token'
 
 function Search({ nodes, setNodes }: Props) {
-  const { spotifyToken: token, logout } = useContext(AppContext)
+  const { token, logout } = useContext(SpotifyContext)
 
   const [searchKey, setSearchKey] = useState('')
   const [tracks, setTracks] = useState([])
@@ -59,7 +59,7 @@ function Search({ nodes, setNodes }: Props) {
           Search
         </button>
       </form>
-      <hr className="bg-light-purple my-2 h-px border-0" />
+      <hr className="my-2 h-px border-0 bg-light-purple" />
       <SearchList nodes={nodes} setNodes={setNodes} tracks={tracks} />
     </div>
   )
