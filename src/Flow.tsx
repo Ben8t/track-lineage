@@ -10,7 +10,6 @@ import ReactFlow, {
   Edge,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
-import Search from './Search'
 import './custom_node.css'
 import CustomNode from './CustomNode'
 import { FlowContext } from './context/FlowContext'
@@ -38,23 +37,18 @@ const Flow = () => {
   )
 
   return (
-    <div className="m-2 grid grid-cols-4 gap-2">
-      <div className="col-span-3" style={{ width: '100%', height: '100%' }}>
-        <ReactFlow
-          className="flow_board"
-          nodes={nodes}
-          onNodesChange={onNodesChange}
-          edges={edges}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          nodeTypes={nodeType}
-        >
-          <Background />
-        </ReactFlow>
-      </div>
-      <div>
-        <Search nodes={nodes} setNodes={setNodes} />
-      </div>
+    <div className="col-span-3" style={{ width: '100%', height: '100%' }}>
+      <ReactFlow
+        className="flow_board"
+        nodes={nodes}
+        onNodesChange={onNodesChange}
+        edges={edges}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeType}
+      >
+        <Background />
+      </ReactFlow>
     </div>
   )
 }

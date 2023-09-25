@@ -1,15 +1,17 @@
 import SearchList from './SearchList.tsx'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import axios from 'axios'
 import { SpotifyContext } from './context/SpotifyContext.tsx'
+import { FlowContext } from './context/FlowContext.tsx'
 
 const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
 const REDIRECT_URI = 'http://localhost:5173'
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
 const RESPONSE_TYPE = 'token'
 
-function Search({ nodes, setNodes }: Props) {
+function Search() {
   const { token, logout } = useContext(SpotifyContext)
+  const { nodes, setNodes } = useContext(FlowContext)
 
   const [searchKey, setSearchKey] = useState('')
   const [tracks, setTracks] = useState([])
