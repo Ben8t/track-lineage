@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "axios": "^1.5.0",
+    "inversify": "^6.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reactflow": "^11.8.3",
+    "reflect-metadata": "^0.1.13",
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {

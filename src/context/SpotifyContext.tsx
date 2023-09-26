@@ -1,4 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
+import useInjection from '../hooks/useInjection'
+import { IStorage } from '../services/storage/interface'
+import { TYPES } from '../inversify.config'
 
 type SpotifyContextProps = {
   token: string | undefined
@@ -21,17 +24,20 @@ type SpotifyContextProviderProps = {
 const SpotifyContextProvider: React.FC<SpotifyContextProviderProps> = ({
   children,
 }: SpotifyContextProviderProps) => {
+  const storage = useInjection<IStorage>(TYPES.StorageService)
   const [token, setToken] = useState<string>()
 
   const logout = useCallback(() => {
-    window.localStorage.removeItem('token')
+    storage.del('music')
     setToken(undefined)
-  }, [setToken])
+  }, [setToken, storage])
 
   useEffect(() => {
     if (token) return
-    setToken(window.localStorage.getItem('token') || undefined)
-  }, [token])
+
+    const data = storage.get('music')
+    setToken(data?.token)
+  }, [token, storage])
 
   useEffect(() => {
     if (!window.location.hash) return
@@ -43,9 +49,9 @@ const SpotifyContextProvider: React.FC<SpotifyContextProviderProps> = ({
       ?.split('=')[1]
     window.location.hash = ''
 
-    if (token) window.localStorage.setItem('token', token)
+    if (token) storage.set('music', { token })
     setToken(token)
-  }, [setToken])
+  }, [setToken, storage])
 
   return (
     <SpotifyContext.Provider value={{ token, logout }}>
