@@ -47,7 +47,7 @@ const Flow = () => {
         onConnect={onConnect}
         nodeTypes={nodeType}
       >
-        <Background />
+        <Background offset={1}/>
       </ReactFlow>
     </div>
   )
