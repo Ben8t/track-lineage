@@ -7,7 +7,8 @@ import { FlowContext } from './context/FlowContext.tsx'
 import { saveAs } from 'file-saver';
 
 const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
-const REDIRECT_URI = 'http://localhost:5173'
+const REDIRECT_URI = window.location.href
+console.log(REDIRECT_URI);
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
 const RESPONSE_TYPE = 'token'
 
