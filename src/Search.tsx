@@ -16,6 +16,16 @@ function Search() {
   const [searchKey, setSearchKey] = useState('')
   const [tracks, setTracks] = useState([])
 
+  const getTrackFeatures = async (token, trackId) => {
+    const response = await axios.get(`https://api.spotify.com/v1/audio-features/${trackId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+  
+    return response.data;
+  };
+
   const searchTracks = async (e) => {
     e.preventDefault()
     const { data } = await axios.get('https://api.spotify.com/v1/search', {
@@ -27,12 +37,25 @@ function Search() {
         type: 'track',
       },
     })
-    console.log(data)
-    setTracks(data.tracks.items)
+
+    const trackItems = data.tracks.items;
+
+    const trackFeaturesPromises = trackItems.map(async (item) => {
+      const features = await getTrackFeatures(token, item.id);
+      return {
+        track: item,
+        features: features
+      };
+    });
+  
+    const trackFeatures = await Promise.all(trackFeaturesPromises);
+    console.log(trackFeatures)
+
+    setTracks(trackFeatures)
   }
 
   return (
-    <div className="search rounded-lg bg-gray-100">
+    <div className="search rounded-lg bg-gray-100 gap-2">
       {!token ? (
         <a
           className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"

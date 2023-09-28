@@ -5,21 +5,33 @@ type Props = {
   nodes: Node[]
   setNodes: React.Dispatch<React.SetStateAction<Node[]>>
 }
+
+function getKey(key) {
+  switch(key) {
+    case 0:
+      return 'C';
+    case 1:
+      return 'C#/Db';
+    case 2:
+      return 'D'
+    default:
+      return 'KEY';
+  }
+}
 function SearchList({ nodes, setNodes, tracks }: Props) {
   function onSubmit(track, event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     console.log(track)
     setNodes(
       nodes.concat({
-        id: track.id,
+        id: track.track.id,
         type: 'customNode',
         data: {
-          title: track.name,
-          artist: track.artists[0].name,
-          bpm: '110',
-          key: 'Eb',
-          style: 'Disco',
-          image: track.album.images[0].url,
+          title: track.track.name,
+          artist: track.track.artists[0].name,
+          bpm: track.features.tempo,
+          key: getKey(track.features.key),
+          image: track.track.album.images[0].url,
         },
         position: { x: 500, y: 25 },
       }),
@@ -33,21 +45,21 @@ function SearchList({ nodes, setNodes, tracks }: Props) {
           <form
             className="form grid grid-cols-2"
             onSubmit={(e) => onSubmit(track, e)}
-            key={track.id}
+            key={track.track.id}
           >
             <div>
               <p
                 className="font-mono font-normal text-purple dark:text-gray-400"
-                key={track.name}
+                key={track.track.name}
               >
-                <img src={track.album.images[0].url} style={{ width: '50%' }} />
-                {track.name}
+                <img src={track.track.album.images[0].url} style={{ width: '50%' }} />
+                {track.track.name}
               </p>
               <p
                 className="font-mono font-normal text-purple dark:text-gray-400"
-                key={track.artists[0].name}
+                key={track.track.artists[0].name}
               >
-                {track.artists[0].name}
+                {track.track.artists[0].name}
               </p>
             </div>
             <div>

@@ -6,7 +6,6 @@ type NodeData = {
   artist: string
   key: string
   bpm: string
-  style: string
 }
 
 type Props = {
@@ -16,7 +15,7 @@ type Props = {
 
 const CustomNode = ({ data, isConnectable }: Props) => {
   console.log(data)
-  const { image, title, artist, key, bpm, style } = data
+  const { image, title, artist, key, bpm } = data
 
   return (
     <div className="text-updater-node shadow-md">
@@ -35,7 +34,6 @@ const CustomNode = ({ data, isConnectable }: Props) => {
         <hr className="my-2 h-px border-0 bg-light-purple" />
         <span>Key: {key}</span>
         <span>BPM: {bpm}</span>
-        <span>Style: {style}</span>
       </div>
       <Handle
         type="source"
