@@ -61,6 +61,11 @@ function SearchList({ nodes, setNodes, tracks }: Props) {
               >
                 {track.track.artists[0].name}
               </p>
+              <p className="font-mono font-normal text-gray-800 dark:text-gray-400"
+                key={track.features.tempo}
+              >
+                BPM: {track.features.tempo}
+              </p>
             </div>
             <div>
               <button
