@@ -14,7 +14,6 @@ type Props = {
 }
 
 const CustomNode = ({ data, isConnectable }: Props) => {
-  console.log(data)
   const { image, title, artist, key, bpm } = data
 
   return (

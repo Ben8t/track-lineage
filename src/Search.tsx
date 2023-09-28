@@ -51,7 +51,6 @@ function Search() {
     });
   
     const trackFeatures = await Promise.all(trackFeaturesPromises);
-    console.log(trackFeatures)
 
     setTracks(trackFeatures)
   }
@@ -65,7 +64,7 @@ function Search() {
     const json = JSON.stringify(data);
     const blob = new Blob([json], { type: 'application/json' });
 
-    saveAs(blob, 'graph_data.json');
+    saveAs(blob, 'track_lineage_export.json');
   }
 
   const fileInputRef = React.createRef();
