@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^1.5.0",
+    "file-saver": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reactflow": "^11.8.3",
