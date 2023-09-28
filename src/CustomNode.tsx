@@ -1,10 +1,20 @@
-import { useCallback } from 'react'
 import { Handle, Position } from 'reactflow'
 
-function CustomNode({ data, isConnectable }) {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value)
-  }, [])
+type NodeData = {
+  image: string
+  title: string
+  artist: string
+  key: string
+  bpm: string
+}
+
+type Props = {
+  data: NodeData
+  isConnectable?: boolean
+}
+
+const CustomNode = ({ data, isConnectable }: Props) => {
+  const { image, title, artist, key, bpm } = data
 
   return (
     <div className="text-updater-node shadow-md">
@@ -16,11 +26,13 @@ function CustomNode({ data, isConnectable }) {
         className="h-3 w-3 bg-purple"
       />
       <div>
-        <img src={data.image} style={{ width: '20%'}} /> <span>{data.title} - {data.artist}</span>
-        <hr className='h-px my-2 bg-light-purple border-0'/>
-        <span>Key: {data.key}</span>
-        <span>BPM: {data.bpm}</span>
-        <span>Style: {data.style}</span>
+        <img src={image} style={{ width: '20%' }} />{' '}
+        <span>
+          {title} - {artist}
+        </span>
+        <hr className="my-2 h-px border-0 bg-light-purple" />
+        <span>Key: {key}</span>
+        <span>BPM: {bpm}</span>
       </div>
       <Handle
         type="source"
