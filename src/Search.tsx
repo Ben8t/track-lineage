@@ -1,7 +1,6 @@
 import React from 'react';
 import SearchList from './SearchList'
 import {useContext, useState} from 'react'
-import axios from 'axios'
 import {SpotifyContext} from './context/SpotifyContext'
 import {FlowContext} from './context/FlowContext'
 import {saveAs} from 'file-saver';
