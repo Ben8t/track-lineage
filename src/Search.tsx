@@ -5,7 +5,7 @@ import axios from 'axios'
 import {SpotifyContext} from './context/SpotifyContext'
 import {FlowContext} from './context/FlowContext'
 import {saveAs} from 'file-saver';
-import {URI} from './provider/Spotify';
+import {URI, getTrackFeatures, searchTrack} from './provider/Spotify';
 
 const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
 const REDIRECT_URI = window.location.href
@@ -19,27 +19,12 @@ function Search() {
     const [searchKey, setSearchKey] = useState('')
     const [tracks, setTracks] = useState([])
 
-    async function getTrackFeatures(token, track_id) {
-        const response = await axios.get(`https://api.spotify.com/v1/audio-features/${track_id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        return response.data;
-    };
+    
+    
 
-    async function searchTracks(e) {
+    async function handleSearchTracks(e) {
         e.preventDefault()
-        const {data} = await axios.get('https://api.spotify.com/v1/search', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            params: {
-                q: searchKey,
-                type: 'track'
-            }
-        })
-
+        const {data}  = await searchTrack(token, searchKey);
         const trackItems = data.tracks.items;
 
         const trackFeaturesPromises = trackItems.map(async (item) => {
@@ -123,7 +108,7 @@ function Search() {
                 onClick={handleExport}>
                 Export
             </button>
-            <form onSubmit={searchTracks}
+            <form onSubmit={handleSearchTracks}
                 className="form grid grid-cols-6 gap-2">
                 <input type="text"
                     onChange={
