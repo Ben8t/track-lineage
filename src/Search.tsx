@@ -7,11 +7,6 @@ import {FlowContext} from './context/FlowContext'
 import {saveAs} from 'file-saver';
 import {URI, getTrackFeatures, searchTrack} from './provider/Spotify';
 
-const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
-const REDIRECT_URI = window.location.href
-const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
-const RESPONSE_TYPE = 'token'
-
 function Search() {
     const {token, logout} = useContext(SpotifyContext)
     const {nodes, setNodes, edges, setEdges} = useContext(FlowContext)
@@ -19,8 +14,6 @@ function Search() {
     const [searchKey, setSearchKey] = useState('')
     const [tracks, setTracks] = useState([])
 
-    
-    
 
     async function handleSearchTracks(e) {
         e.preventDefault()
