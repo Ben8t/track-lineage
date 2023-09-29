@@ -3,7 +3,7 @@ import { Edge, Node } from 'reactflow'
 import { useDebounce } from 'use-debounce'
 import useInjection from '../hooks/useInjection'
 import { IStorage } from '../services/storage/interface'
-import { TYPES } from '../inversify.config'
+import { TYPES } from '../types'
 
 type FlowContextProps = {
   nodes: Node[]

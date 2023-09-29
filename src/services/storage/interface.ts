@@ -1,10 +1,11 @@
 import { Edge, Node } from 'reactflow'
+import { AccessToken } from '../music/interface'
 
-export type StorageKey = 'music' | 'flow'
+export type StorageKey = 'oauth' | 'flow'
 
 export type StorageData = {
   flow: { nodes: Node[]; edges: Edge[] }
-  music: { token: string }
+  oauth: AccessToken
 }
 
 export interface IStorage {
