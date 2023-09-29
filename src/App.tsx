@@ -1,8 +1,9 @@
 import 'reactflow/dist/style.css'
 import './custom_node.css'
-import Header from './Header.tsx'
-import Flow from './Flow.tsx'
-import Search from './Search.tsx'
+import Header from './Header'
+import Flow from './Flow'
+import Search from './Search'
+import React from 'react'
 
 const App = () => {
   return (

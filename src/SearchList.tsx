@@ -2,7 +2,8 @@ import {FormEvent} from 'react'
 import {Node} from 'reactflow'
 
 type Props = {
-    nodes: Node[] setNodes: React.Dispatch < React.SetStateAction < Node[] >>
+    nodes: Node[];
+    setNodes: React.Dispatch < React.SetStateAction < Node[] >>;
 }
 
 function getKey(key) {

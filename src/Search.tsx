@@ -1,9 +1,9 @@
 import React from 'react';
-import SearchList from './SearchList.tsx'
+import SearchList from './SearchList'
 import {useContext, useState} from 'react'
 import axios from 'axios'
-import {SpotifyContext} from './context/SpotifyContext.tsx'
-import {FlowContext} from './context/FlowContext.tsx'
+import {SpotifyContext} from './context/SpotifyContext'
+import {FlowContext} from './context/FlowContext'
 import {saveAs} from 'file-saver';
 
 const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
