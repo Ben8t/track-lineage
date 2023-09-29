@@ -5,6 +5,7 @@ import axios from 'axios'
 import {SpotifyContext} from './context/SpotifyContext'
 import {FlowContext} from './context/FlowContext'
 import {saveAs} from 'file-saver';
+import {URI} from './provider/Spotify';
 
 const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
 const REDIRECT_URI = window.location.href
@@ -95,9 +96,7 @@ function Search() {
             {
             !token ? (
                 <a className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
-                    href={
-                        `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`
-                }>
+                    href={URI}>
                     Login to Spotify
                 </a>
             ) : (
