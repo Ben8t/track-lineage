@@ -14,7 +14,6 @@ class SpotifyService implements IOAuthMusicProvider {
   private apiEndpoint: string = 'https://api.spotify.com/v1/'
 
   search = async (token: string, key: string) => {
-    console.log(token);
     const { data } = await axios.get<SearchResult>(
       this.apiEndpoint + 'search',
       {
