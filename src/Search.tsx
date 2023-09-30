@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { OAuthMusicContext } from './context/OAuthMusicContext'
 import SearchList from './SearchList.tsx'
 import { Track } from './services/music/interface.ts'
+import React from 'react'
 
 function Search() {
   const { login, logout } = useContext(OAuthMusicContext)

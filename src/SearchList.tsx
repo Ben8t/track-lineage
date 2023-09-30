@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { FlowContext } from './context/FlowContext'
 import { Track } from './services/music/interface'
+import React from 'react'
 
 type Props = {
   tracks: Track[]
