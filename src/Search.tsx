@@ -13,7 +13,7 @@ function Search() {
   const { nodes, edges, setNodes, setEdges } = useContext(FlowContext)
   const [tracks, setTracks] = useState<Track[]>([])
 
-  function handleExport(e) {
+  function handleExport() {
     const data = {
         nodes: nodes,
         edges: edges
@@ -30,7 +30,7 @@ function Search() {
   }
 
 
-  function handleImport(event) {
+  function handleImport(event: { target: { files: any[] } }) {
     const file = event.target.files[0];
     const reader = new FileReader();
 

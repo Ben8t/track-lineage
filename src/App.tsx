@@ -3,7 +3,6 @@ import './custom_node.css'
 import Header from './Header'
 import Flow from './Flow'
 import Search from './Search'
-import React from 'react'
 
 const App = () => {
   return (

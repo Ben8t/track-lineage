@@ -9,7 +9,7 @@ type Props = {
 const SearchList: React.FC<Props> = ({ tracks }) => {
   const { nodes, setNodes } = useContext(FlowContext)
   
-  function getKey(key) {
+  function getKey(key: number) {
     switch (key) {
         case 0:
             return 'C';

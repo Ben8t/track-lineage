@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import { IOAuthMusicProvider, Track, AudioFeatures } from './interface'
+import { IOAuthMusicProvider, Track } from './interface'
 import axios from 'axios'
 
 type SearchResult = {
