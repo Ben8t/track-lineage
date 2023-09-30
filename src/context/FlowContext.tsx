@@ -1,13 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { Edge, Node } from 'reactflow'
 import { useDebounce } from 'use-debounce'
-
-const FLOW_LOCALSTORAGE_KEY = 'flow'
-
-type FlowStorage = {
-  nodes: Node[]
-  edges: Edge[]
-}
+import useInjection from '../hooks/useInjection'
+import { IStorage } from '../services/storage/interface'
+import { TYPES } from '../types'
 
 type FlowContextProps = {
   nodes: Node[]
@@ -32,6 +28,7 @@ type FlowContextProviderProps = {
 const FlowContextProvider: React.FC<FlowContextProviderProps> = ({
   children,
 }: FlowContextProviderProps) => {
+  const storage = useInjection<IStorage>(TYPES.StorageService)
   const [nodes, setNodes] = useState<Node[]>([])
   const [edges, setEdges] = useState<Edge[]>([])
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
@@ -41,32 +38,26 @@ const FlowContextProvider: React.FC<FlowContextProviderProps> = ({
   useEffect(() => {
     if (isLoaded) return
 
-    const json = window.localStorage.getItem(FLOW_LOCALSTORAGE_KEY)
-    if (!json) {
-      console.log('no flow localstorage')
+    const data = storage.get('flow')
+
+    if (!data) {
       setIsLoaded(true)
       return
     }
 
-    try {
-      const storage = JSON.parse(json) as FlowStorage
-      setEdges(storage.edges)
-      setNodes(storage.nodes)
-      console.log('flow localstorage loaded')
-    } catch (e) {
-      console.error(e)
-    }
+    setNodes(data.nodes)
+    setEdges(data.edges)
 
     setIsLoaded(true)
-  }, [isLoaded])
+  }, [isLoaded, storage])
 
   useEffect(() => {
-    if (!isLoaded) return
+    if (!isLoaded || (debounceEdges.length === 0 && debounceNodes.length === 0))
+      return
 
     console.log('update nodes/edges')
-    const storage: FlowStorage = { nodes: debounceNodes, edges: debounceEdges }
-    window.localStorage.setItem(FLOW_LOCALSTORAGE_KEY, JSON.stringify(storage))
-  }, [debounceNodes, debounceEdges, isLoaded])
+    storage.set('flow', { nodes: debounceNodes, edges: debounceEdges })
+  }, [debounceNodes, debounceEdges, isLoaded, storage])
 
   return (
     <FlowContext.Provider value={{ nodes, setNodes, edges, setEdges }}>
