@@ -1,110 +1,67 @@
-import React from 'react';
-import SearchList from './SearchList.tsx'
 import { useContext, useState } from 'react'
-import axios from 'axios'
-import { SpotifyContext } from './context/SpotifyContext.tsx'
-import { FlowContext } from './context/FlowContext.tsx'
-import { saveAs } from 'file-saver';
-
-const CLIENT_ID = '0350c90137454dc5a748549664e5ba75'
-const REDIRECT_URI = 'http://localhost:5173'
-const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
-const RESPONSE_TYPE = 'token'
+import { OAuthMusicContext } from './context/OAuthMusicContext'
+import SearchList from './SearchList'
+import { Track } from './services/music/interface'
+import React from 'react'
+import { FlowContext } from './context/FlowContext'
+import {saveAs} from 'file-saver'
 
 function Search() {
-  const { token, logout } = useContext(SpotifyContext)
-  const { nodes, setNodes, edges, setEdges } = useContext(FlowContext)
+  const { login, logout } = useContext(OAuthMusicContext)
+  const { search, token } = useContext(OAuthMusicContext)
+  const [key, setKey] = useState<string>('')
+  const { nodes, edges, setNodes, setEdges } = useContext(FlowContext)
+  const [tracks, setTracks] = useState<Track[]>([])
 
-  const [searchKey, setSearchKey] = useState('')
-  const [tracks, setTracks] = useState([])
-
-  const getTrackFeatures = async (token, trackId) => {
-    const response = await axios.get(`https://api.spotify.com/v1/audio-features/${trackId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    });
-  
-    return response.data;
-  };
-
-  const searchTracks = async (e) => {
-    e.preventDefault()
-    const { data } = await axios.get('https://api.spotify.com/v1/search', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        q: searchKey,
-        type: 'track',
-      },
-    })
-
-    const trackItems = data.tracks.items;
-
-    const trackFeaturesPromises = trackItems.map(async (item) => {
-      const features = await getTrackFeatures(token, item.id);
-      return {
-        track: item,
-        features: features
-      };
-    });
-  
-    const trackFeatures = await Promise.all(trackFeaturesPromises);
-
-    setTracks(trackFeatures)
-  }
-
-  const handleExport = (e) => {
+  function handleExport(e) {
     const data = {
-      nodes: nodes,
-      edges: edges
+        nodes: nodes,
+        edges: edges
     };
-
     const json = JSON.stringify(data);
-    const blob = new Blob([json], { type: 'application/json' });
-
+    const blob = new Blob([json], {type: 'application/json'});
     saveAs(blob, 'track_lineage_export.json');
   }
 
   const fileInputRef = React.createRef();
 
-  const handleImportButtonClick = () => {
+  function handleImportButtonClick() {
     fileInputRef.current.click();
-  };
+  }
 
-  const handleImport = (event) => {
+
+  function handleImport(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
+        try {
+            const data = JSON.parse(e.target.result);
 
-        if (data.nodes && data.edges) {
-          setNodes(data.nodes);
-          setEdges(data.edges);
-          alert('Import successful!');
-        } else {
-          alert('Invalid file format. Please select a valid JSON file.');
+            if (data.nodes && data.edges) {
+                setNodes(data.nodes);
+                setEdges(data.edges);
+                alert('Import successful!');
+            } else {
+                alert('Invalid file format. Please select a valid JSON file.');
+            }
+        } catch (error) {
+            alert('Error parsing JSON. Please check the file format.');
         }
-      } catch (error) {
-        alert('Error parsing JSON. Please check the file format.');
-      }
     };
 
     reader.readAsText(file);
-  };
+  }
 
   return (
-    <div className="search rounded-lg bg-gray-100 gap-2">
-      {!token ? (
-        <a
+    <div className="search rounded-lg bg-gray-100">
+      {!token?.token ? (
+        <button
           className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
-          href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
+          onClick={login}
         >
-          Login to Spotify
-        </a>
+          Login
+        </button>
       ) : (
         <button
           className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
@@ -114,42 +71,38 @@ function Search() {
         </button>
       )}
       <div>
-      <button
-          className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
-          onClick={handleImportButtonClick}
-        >
-          Import
-      </button>
+                <button className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
+                    onClick={handleImportButtonClick}>
+                    Import
+                </button>
+                <input type="file" accept=".json"
+                    ref={fileInputRef}
+                    style={
+                        {display: 'none'}
+                    }
+                    onChange={handleImport}/>
+            </div>
+
+            <button className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
+                onClick={handleExport}>
+                Export
+            </button>
       <input
-        type="file"
-        accept=".json"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={handleImport}
+        type="text"
+        value={key}
+        onChange={(e) => setKey(e.target.value)}
+        className="col-span-4 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
       />
-      </div>
-      
       <button
-          className="hover:bg-purple-700 col-span-1 mb-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
-          onClick={handleExport}
-        >
-          Export
+        className="hover:bg-purple-700 col-span-1 col-span-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
+        onClick={async () => {
+          setTracks(await search(key))
+        }}
+      >
+        Search
       </button>
-      <form onSubmit={searchTracks} className="form grid grid-cols-6 gap-2">
-        <input
-          type="text"
-          onChange={(e) => setSearchKey(e.target.value)}
-          className="col-span-4 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-        />
-        <button
-          className="hover:bg-purple-700 col-span-1 col-span-2 rounded bg-purple px-4 py-2 font-mono font-bold text-white"
-          type={'submit'}
-        >
-          Search
-        </button>
-      </form>
       <hr className="my-2 h-px border-0 bg-light-purple" />
-      <SearchList nodes={nodes} setNodes={setNodes} tracks={tracks} />
+      <SearchList tracks={tracks} />
     </div>
   )
 }

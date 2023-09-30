@@ -1,16 +1,22 @@
+import 'reflect-metadata'
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import App from './App'
 import './index.css'
-import SpotifyContextProvider from './context/SpotifyContext.tsx'
-import FlowContextProvider from './context/FlowContext.tsx'
+import FlowContextProvider from './context/FlowContext'
+import InversifyContextProvider from './context/InversifyContext'
+import container from './inversify.config'
+import OAuthMusicContextProvider from './context/OAuthMusicContext'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <SpotifyContextProvider>
-      <FlowContextProvider>
-        <App />
-      </FlowContextProvider>
-    </SpotifyContextProvider>
+    <InversifyContextProvider container={container}>
+      <OAuthMusicContextProvider>
+        <FlowContextProvider>
+          <App />
+        </FlowContextProvider>
+      </OAuthMusicContextProvider>
+    </InversifyContextProvider>
   </React.StrictMode>,
 )

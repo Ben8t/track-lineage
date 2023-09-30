@@ -13,6 +13,7 @@ import 'reactflow/dist/style.css'
 import './custom_node.css'
 import CustomNode from './CustomNode'
 import { FlowContext } from './context/FlowContext'
+import React from 'react'
 
 const Flow = () => {
   const { nodes, setNodes, edges, setEdges } = useContext(FlowContext)

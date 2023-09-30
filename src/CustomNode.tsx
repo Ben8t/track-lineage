@@ -1,3 +1,4 @@
+import React from 'react'
 import { Handle, Position } from 'reactflow'
 
 type NodeData = {
@@ -15,7 +16,6 @@ type Props = {
 
 const CustomNode = ({ data, isConnectable }: Props) => {
   const { image, title, artist, key, bpm } = data
-
   return (
     <div className="text-updater-node shadow-md">
       <Handle
