@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import { IOAuthMusicProvider, Track } from './interface'
+import { IOAuthMusicProvider, Track, AudioFeatures } from './interface'
 import axios from 'axios'
 
 type SearchResult = {
@@ -26,8 +26,23 @@ class SpotifyService implements IOAuthMusicProvider {
         },
       },
     )
+    const trackItems = data.tracks.items;
+    const trackFeaturesPromises = trackItems.map(async (item) => {
+      const features = await this.get_track_features(token, item.id);
+      item.audio_features = features;
+      return item
+    });
+    const trackFeatures = await Promise.all(trackFeaturesPromises);
+    return trackFeatures
+  }
 
-    return data.tracks.items
+  get_track_features = async(token: string, track_id: string) => {
+    const response = await axios.get(`https://api.spotify.com/v1/audio-features/${track_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    return response.data;
   }
 }
 
