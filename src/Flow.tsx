@@ -14,7 +14,7 @@ import './custom_node.css'
 import CustomNode from './CustomNode'
 import { FlowContext } from './context/FlowContext'
 
-const Flow = () => {
+const Flow: React.FC = () => {
   const { nodes, setNodes, edges, setEdges } = useContext(FlowContext)
 
   const nodeType = useMemo(() => ({ customNode: CustomNode }), [])
@@ -47,7 +47,7 @@ const Flow = () => {
         onConnect={onConnect}
         nodeTypes={nodeType}
       >
-        <Background offset={1}/>
+        <Background offset={1} />
       </ReactFlow>
     </div>
   )

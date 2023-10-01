@@ -6,7 +6,7 @@ import React from 'react'
 import { FlowContext } from './context/FlowContext'
 import {saveAs} from 'file-saver'
 
-function Search() {
+const Search: React.FC = () => {
   const { login, logout } = useContext(OAuthMusicContext)
   const { search, token } = useContext(OAuthMusicContext)
   const [key, setKey] = useState<string>('')
