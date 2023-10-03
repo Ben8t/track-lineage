@@ -11,7 +11,7 @@ import { TYPES } from '../types'
 import {
   AccessToken,
   IOAuthMusicProvider,
-  Track
+  Track,
 } from '../services/music/interface'
 
 type OAuthMusicContextProps = {
