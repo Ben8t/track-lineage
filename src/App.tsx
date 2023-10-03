@@ -1,7 +1,7 @@
 import 'reactflow/dist/style.css'
 import './custom_node.css'
 import HomeView from './views/HomeView'
-import TestView from './views/TestView'
+import AppView from './views/AppView'
 import {
   Route,
   Routes,
@@ -14,7 +14,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeView />} />
-        <Route path="/test" element={<TestView />}/>
+        <Route path="/app" element={<AppView />}/>
       </Routes>
     </BrowserRouter>
   )
