@@ -18,7 +18,7 @@ const HomeView = () => {
 
       <div className='absolute bottom-80 right-80 w-20 h-20 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob'></div>
       <div className='absolute bottom-30 right-40 w-40 h-40 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000'></div>
-      <div className='absolute bottom-20 right-40 w-80 h-80 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000'></div>
+      <div className='absolute bottom-20 right-40 w-80 h-80 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-6000'></div>
     </>
   )
 }
