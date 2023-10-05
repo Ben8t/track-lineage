@@ -26,23 +26,26 @@ class SpotifyService implements IOAuthMusicProvider {
         },
       },
     )
-    const trackItems = data.tracks.items;
+    const trackItems = data.tracks.items
     const trackFeaturesPromises = trackItems.map(async (item) => {
-      const features = await this.get_track_features(token, item.id);
-      item.audio_features = features;
+      const features = await this.get_track_features(token, item.id)
+      item.audio_features = features
       return item
-    });
-    const trackFeatures = await Promise.all(trackFeaturesPromises);
+    })
+    const trackFeatures = await Promise.all(trackFeaturesPromises)
     return trackFeatures
   }
 
-  get_track_features = async(token: string, track_id: string) => {
-    const response = await axios.get(`https://api.spotify.com/v1/audio-features/${track_id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-    return response.data;
+  get_track_features = async (token: string, track_id: string) => {
+    const response = await axios.get(
+      `https://api.spotify.com/v1/audio-features/${track_id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+    return response.data
   }
 }
 

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-const Header = () => {
+const Header: React.FC = () => {
   const location = useLocation();
   const headerStyle = location.pathname === '/app' ? 'bg-black' : 'bg-grey';
   const h1Style = location.pathname === '/app' ? 'text-white' : 'text-purple';
