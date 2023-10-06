@@ -2,30 +2,39 @@ import 'reactflow/dist/style.css'
 import '../custom_node.css'
 import Header from '../Header'
 
-
 const HomeView = () => {
   return (
     <>
-      <Header/>
+      <Header />
       <div className="grid grid-cols-12 gap-2">
-          <div className="text-8xl mt-10 ml-40 text-bold col-span-8 text-purple">Reinventing <br/> Playlist Creation 🎶</div>
-          <div className="text-4xl ml-40 col-span-8 text-black">for music enthusiasts & DJs</div>
+        <div className="text-bold col-span-8 ml-40 mt-10 text-8xl text-purple">
+          Reinventing <br /> Playlist Creation 🎶
+        </div>
+        <div className="col-span-8 ml-40 text-4xl text-black">
+          for music enthusiasts & DJs
+        </div>
       </div>
-      <div className="grid grid-cols-12 gap-2 mt-20 float-right">
-          <div className="text-3xl mt-40 mr-5 col-span-8 text-black text-decoration-line: underline">Connect with music provider:</div>
-          <div className="text-2xl mr-40 mt-5 text-bold col-span-8 text-black flex">
-            <img className="object-scale-down h-6 w-6 mt-1 mr-1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png" alt="" />
-            Spotify
-          </div>
+      <div className="float-right mt-20 grid grid-cols-12 gap-2">
+        <div className="text-decoration-line: col-span-8 mr-5 mt-40 text-3xl text-black underline">
+          Connect with music provider:
+        </div>
+        <div className="text-bold col-span-8 mr-40 mt-5 flex text-2xl text-black">
+          <img
+            className="mr-1 mt-1 h-6 w-6 object-scale-down"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png"
+            alt=""
+          />
+          Spotify
+        </div>
       </div>
 
-      <div className='absolute top-80 left-40 w-80 h-80 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob'></div>
-      <div className='absolute top-40 left-80 w-80 h-80 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000'></div>
-      <div className='absolute top-40 left-20 w-80 h-80 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000'></div>
+      <div className="absolute left-40 top-80 h-80 w-80 animate-blob rounded-full bg-purple opacity-30 mix-blend-multiply blur-3xl filter"></div>
+      <div className="animation-delay-2000 absolute left-80 top-40 h-80 w-80 animate-blob rounded-full bg-fuchsia-500 opacity-30 mix-blend-multiply blur-3xl filter"></div>
+      <div className="animation-delay-4000 absolute left-20 top-40 h-80 w-80 animate-blob rounded-full bg-purple opacity-30 mix-blend-multiply blur-3xl filter"></div>
 
-      <div className='absolute bottom-80 right-80 w-20 h-20 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob'></div>
-      <div className='absolute bottom-30 right-40 w-40 h-40 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000'></div>
-      <div className='absolute bottom-20 right-40 w-80 h-80 bg-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-6000'></div>
+      <div className="absolute bottom-80 right-80 h-20 w-20 animate-blob rounded-full bg-purple opacity-30 mix-blend-multiply blur-3xl filter"></div>
+      <div className="bottom-30 animation-delay-4000 absolute right-40 h-40 w-40 animate-blob rounded-full bg-fuchsia-500 opacity-30 mix-blend-multiply blur-3xl filter"></div>
+      <div className="animation-delay-6000 absolute bottom-20 right-40 h-80 w-80 animate-blob rounded-full bg-purple opacity-30 mix-blend-multiply blur-3xl filter"></div>
     </>
   )
 }
