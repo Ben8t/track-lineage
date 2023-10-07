@@ -14,8 +14,7 @@ const HomeView = () => {
       <div className="grid grid-cols-12 gap-2 mt-20 float-right">
           <div className="text-3xl mt-40 mr-5 col-span-8 text-black text-decoration-line: underline">Connect with music provider:</div>
           <div className="text-2xl mr-40 mt-5 text-bold col-span-8 text-black flex">
-            <img className="object-scale-down h-6 w-6 mt-1 mr-1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png" alt="" />
-            Spotify
+            <img className="object-fill h-10" src="./src/assets/spotify_logo.png" alt="" />
           </div>
       </div>
 
