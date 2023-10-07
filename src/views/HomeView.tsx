@@ -20,11 +20,10 @@ const HomeView = () => {
         </div>
         <div className="text-bold col-span-8 mr-40 mt-5 flex text-2xl text-black">
           <img
-            className="mr-1 mt-1 h-6 w-6 object-scale-down"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png"
+            className="h-10 object-fill"
+            src="./src/assets/spotify_logo.png"
             alt=""
           />
-          Spotify
         </div>
       </div>
 
