@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, ChangeEvent, useRef } from 'react'
 import { OAuthMusicContext } from './context/OAuthMusicContext'
 import SearchList from './SearchList'
 import { Track } from './services/music/interface'
@@ -23,39 +23,42 @@ const Search: React.FC = () => {
     saveAs(blob, 'track_lineage_export.json')
   }
 
-  const fileInputRef = React.createRef()
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleImportButtonClick = () => {
-    fileInputRef.current.click()
+    fileInputRef.current?.click()
   }
 
-  const handleImport = (event: { target: { files: Blob[] } }) => {
-    const file = event.target.files[0]
-    const reader = new FileReader()
+  const handleImport = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
 
-    reader.onload = (e) => {
-      try {
-        const result = e.target?.result as string
+    if (file) {
+      const reader = new FileReader()
 
-        if (result) {
-          const data = JSON.parse(result)
+      reader.onload = (e) => {
+        try {
+          const result = e.target?.result as string
 
-          if (data.nodes && data.edges) {
-            setNodes(data.nodes)
-            setEdges(data.edges)
-            alert('Import successful!')
+          if (result) {
+            const data = JSON.parse(result)
+
+            if (data.nodes && data.edges) {
+              setNodes(data.nodes)
+              setEdges(data.edges)
+              alert('Import successful!')
+            } else {
+              alert('Invalid file format. Please select a valid JSON file.')
+            }
           } else {
-            alert('Invalid file format. Please select a valid JSON file.')
+            alert('Empty file or unable to read.')
           }
-        } else {
-          alert('Empty file or unable to read.')
+        } catch (error) {
+          alert('Error parsing JSON. Please check the file format.')
         }
-      } catch (error) {
-        alert('Error parsing JSON. Please check the file format.')
       }
-    }
 
-    reader.readAsText(file)
+      reader.readAsText(file)
+    }
   }
 
   return (
