@@ -29,7 +29,7 @@ const Search: React.FC = () => {
     fileInputRef.current.click()
   }
 
-  const handleImport = (event: { target: { files: unknown[] } }) => {
+  const handleImport = (event: { target: { files: Blob[] } }) => {
     const file = event.target.files[0]
     const reader = new FileReader()
 
