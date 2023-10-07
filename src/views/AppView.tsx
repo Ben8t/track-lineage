@@ -4,11 +4,10 @@ import Header from '../Header'
 import Flow from '../Flow'
 import Search from '../Search'
 
-
 const AppView = () => {
   return (
     <>
-      <Header/>
+      <Header />
 
       <div className="m-2 grid grid-cols-4 gap-2">
         <Flow />
