@@ -29,20 +29,26 @@ const Search: React.FC = () => {
     fileInputRef.current.click()
   }
 
-  const handleImport = (event: { target: { files: any[] } }) => {
+  const handleImport = (event: { target: { files: unknown[] } }) => {
     const file = event.target.files[0]
     const reader = new FileReader()
 
     reader.onload = (e) => {
       try {
-        const data = JSON.parse(e.target.result)
+        const result = e.target?.result as string
 
-        if (data.nodes && data.edges) {
-          setNodes(data.nodes)
-          setEdges(data.edges)
-          alert('Import successful!')
+        if (result) {
+          const data = JSON.parse(result)
+
+          if (data.nodes && data.edges) {
+            setNodes(data.nodes)
+            setEdges(data.edges)
+            alert('Import successful!')
+          } else {
+            alert('Invalid file format. Please select a valid JSON file.')
+          }
         } else {
-          alert('Invalid file format. Please select a valid JSON file.')
+          alert('Empty file or unable to read.')
         }
       } catch (error) {
         alert('Error parsing JSON. Please check the file format.')
