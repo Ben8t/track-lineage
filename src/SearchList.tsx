@@ -50,6 +50,7 @@ const SearchList: React.FC<Props> = ({ tracks }) => {
           bpm: track.audio_features.tempo,
           key: getKey(track.audio_features.key),
           image: track.album.images[0].url,
+          preview_url: track.preview_url,
         },
         position: { x: 500, y: 25 },
       }),

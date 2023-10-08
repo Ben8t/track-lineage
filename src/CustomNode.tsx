@@ -1,4 +1,5 @@
 import { Handle, Position } from 'reactflow'
+import AudioPlayer from './AudioPlayer'
 
 type NodeData = {
   image: string
@@ -6,6 +7,7 @@ type NodeData = {
   artist: string
   key: string
   bpm: string
+  preview_url: string
 }
 
 type Props = {
@@ -14,7 +16,7 @@ type Props = {
 }
 
 const CustomNode = ({ data, isConnectable }: Props) => {
-  const { image, title, artist, key, bpm } = data
+  const { image, title, artist, key, bpm, preview_url } = data
   return (
     <div className="text-updater-node shadow-md">
       <Handle
@@ -32,6 +34,7 @@ const CustomNode = ({ data, isConnectable }: Props) => {
         <hr className="my-2 h-px border-0 bg-light-purple" />
         <span>Key: {key}</span>
         <span>BPM: {bpm}</span>
+        <AudioPlayer src={preview_url} />
       </div>
       <Handle
         type="source"
