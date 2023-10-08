@@ -1,6 +1,7 @@
 import 'reactflow/dist/style.css'
 import '../custom_node.css'
 import Header from '../Header'
+import spotify_img from '../assets/spotify_logo.png'
 
 const HomeView = () => {
   return (
@@ -19,11 +20,7 @@ const HomeView = () => {
           Connect with music provider:
         </div>
         <div className="text-bold col-span-8 mr-40 mt-5 flex text-2xl text-black">
-          <img
-            className="h-10 object-fill"
-            src="./src/assets/spotify_logo.png"
-            alt=""
-          />
+          <img className="h-10 object-fill" src={spotify_img} alt="" />
         </div>
       </div>
 
