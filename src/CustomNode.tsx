@@ -6,6 +6,7 @@ type NodeData = {
   artist: string
   key: string
   bpm: string
+  preview_url: string
 }
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 }
 
 const CustomNode = ({ data, isConnectable }: Props) => {
-  const { image, title, artist, key, bpm } = data
+  const { image, title, artist, key, bpm, preview_url } = data
   return (
     <div className="text-updater-node shadow-md">
       <Handle
@@ -32,6 +33,10 @@ const CustomNode = ({ data, isConnectable }: Props) => {
         <hr className="my-2 h-px border-0 bg-light-purple" />
         <span>Key: {key}</span>
         <span>BPM: {bpm}</span>
+        <audio style={{ width: '100%' }} controls>
+          <source src={preview_url} type="audio/mpeg" />
+          Your browser does not support the audio tag.
+        </audio>
       </div>
       <Handle
         type="source"
