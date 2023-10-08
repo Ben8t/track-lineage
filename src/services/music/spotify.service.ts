@@ -33,7 +33,6 @@ class SpotifyService implements IOAuthMusicProvider {
       return item
     })
     const trackFeatures = await Promise.all(trackFeaturesPromises)
-    console.log(trackFeatures)
     return trackFeatures
   }
 
