@@ -9,7 +9,7 @@ type SearchResult = {
 @injectable()
 class SpotifyService implements IOAuthMusicProvider {
   public clientId: string = '0350c90137454dc5a748549664e5ba75'
-  public redirectUri: string = 'http://localhost:5173/' // TODO: change this url
+  public redirectUri: string = window.location.href
   public authEndpoint: string = 'https://accounts.spotify.com/authorize'
   private apiEndpoint: string = 'https://api.spotify.com/v1/'
 
