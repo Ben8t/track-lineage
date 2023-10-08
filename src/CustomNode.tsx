@@ -1,4 +1,5 @@
 import { Handle, Position } from 'reactflow'
+import AudioPlayer from './AudioPlayer'
 
 type NodeData = {
   image: string
@@ -33,10 +34,7 @@ const CustomNode = ({ data, isConnectable }: Props) => {
         <hr className="my-2 h-px border-0 bg-light-purple" />
         <span>Key: {key}</span>
         <span>BPM: {bpm}</span>
-        <audio style={{ width: '100%' }} controls>
-          <source src={preview_url} type="audio/mpeg" />
-          Your browser does not support the audio tag.
-        </audio>
+        <AudioPlayer src={preview_url} />
       </div>
       <Handle
         type="source"
